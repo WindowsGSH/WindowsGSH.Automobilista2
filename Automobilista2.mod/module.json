@@ -1,0 +1,137 @@
+{
+  "id": "automobilista-2",
+  "name": "Automobilista 2 Dedicated Server",
+  "version": "1.2.0",
+  "author": "Shenniko",
+  "description": "WindowsGSH module converted from the WindowsGSM Automobilista2 plugin.",
+  "url": "https://github.com/WindowsGSH/WindowsGSH.Automobilista2",
+  "homepage": "https://github.com/WindowsGSH/WindowsGSH.Automobilista2",
+  "repository": "https://github.com/WindowsGSH/WindowsGSH.Automobilista2",
+  "sourceUrl": "https://github.com/WindowsGSH/WindowsGSH.Automobilista2",
+  "color": "#1E8449",
+  "moduleApiVersion": "1.0",
+  "minimumWindowsGshVersion": "0.1.0",
+  "type": "csharp",
+  "entry": "WindowsGSH.Modules.Automobilista2.Automobilista2Module",
+  "steam": {
+    "appId": "1338040",
+    "anonymous": true,
+    "validate": true
+  },
+  "entryPoints": {
+    "start": "DedicatedServerCmd.exe",
+    "processName": "DedicatedServerCmd"
+  },
+  "runtime": {
+    "allowsEmbeddedConsole": true,
+    "portIncrements": 1,
+    "queryProtocol": "process",
+    "defaultArguments": "-LOCALLOGTIMES -log {server.additionalArguments}",
+    "stop": {
+      "strategy": "closeWindow",
+      "waitMilliseconds": 2000,
+      "killAfterTimeout": true
+    }
+  },
+  "capabilities": {
+    "directConnection": true
+  },
+  "configFields": [
+    {
+      "key": "server.name",
+      "label": "Server Name",
+      "type": "Text",
+      "defaultValue": "Automobilista 2 Dedicated Server",
+      "required": true,
+      "group": "Server"
+    },
+    {
+      "key": "network.port",
+      "label": "Server Port",
+      "type": "Port",
+      "defaultValue": 27015,
+      "required": true,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network"
+    },
+    {
+      "key": "network.queryPort",
+      "label": "Query Port",
+      "type": "Port",
+      "defaultValue": 27016,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network"
+    },
+    {
+      "key": "server.additionalArguments",
+      "label": "Additional Arguments",
+      "type": "CommandLine",
+      "defaultValue": "",
+      "group": "Launch"
+    },
+    {
+      "key": "server.maxPlayers",
+      "label": "Maximum Players",
+      "type": "Number",
+      "defaultValue": 32,
+      "minimum": 1,
+      "maximum": 64,
+      "group": "Server"
+    },
+    {
+      "key": "server.password",
+      "label": "Join Password",
+      "type": "Password",
+      "defaultValue": "",
+      "group": "Security"
+    },
+    {
+      "key": "server.spectatorPassword",
+      "label": "Spectator Password",
+      "type": "Password",
+      "defaultValue": "",
+      "group": "Security"
+    },
+    {
+      "key": "server.allowEmptyJoin",
+      "label": "Allow Joining Empty Server",
+      "type": "Boolean",
+      "defaultValue": true,
+      "group": "Server"
+    },
+    {
+      "key": "server.controlGameSetup",
+      "label": "Server Controls Game Setup",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Gameplay"
+    }
+  ],
+  "ports": [
+    {
+      "id": "game",
+      "name": "Game Port",
+      "protocol": "udp",
+      "configField": "network.port",
+      "required": true
+    },
+    {
+      "id": "query",
+      "name": "Query Port",
+      "protocol": "udp",
+      "configField": "network.queryPort"
+    }
+  ],
+  "backupTargets": [
+    {
+      "key": "config",
+      "label": "Config",
+      "path": "server.cfg",
+      "type": "file",
+      "required": true
+    }
+  ],
+  "addons": []
+}
